@@ -1,4 +1,8 @@
+<head><h1>Decouverte PDO</h1>
+</head>
+
 <?php
+
 try
 {
 $mysqlClient = new PDO(
@@ -10,5 +14,6 @@ catch (Exception $e)
 {
     die('Erreur : '.$e->getMessage());
 }
-//teste
+//b//
+
 ?>
