@@ -1,9 +1,4 @@
-<h1>Découverte PDO</h1>
-
-
 <?php
-
-
 try
 {
 $mysqlClient = new PDO(
@@ -34,22 +29,6 @@ $liens= $lienRecipe->fetchAll();
 
 
 foreach($recipe as $allRecipe){
-    echo '<p>' . $allRecipe['recipe_name'] . ' ' . $allRecipe['preparation_time'] . ' min</p>';
+    echo '<p><a href="detailRecette.php?id='.$allRecipe['id_recipe'].'">'. $allRecipe['recipe_name'] . '</a> ' . $allRecipe['preparation_time'] . ' min</p><br>';
 
-    foreach($liens as $allLiens){
-        if($allLiens['id_recipe']== $allRecipe['id_recipe']){
-            foreach($ingredient as $allIngredient){
-                if($allIngredient['id_ingredient'] == $allLiens['id_ingredient']){
-                    echo'<p>' . $allIngredient['ingredient_name'] . '</p>';
-                }
-            }
-        }
-    }
-    echo '<br>';
 }
-
-
-
-//AFFICHER UNE SEUL RECETTE ET LA CATEGORIE POUR LA SUITE
-
-?>
