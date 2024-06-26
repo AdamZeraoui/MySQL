@@ -12,6 +12,15 @@ class CinemaController{
 
         require"view/film/listFilms.php";
     }
+    public function detFilms($id){
+        $pdo= Connect::seConnecter();
+        $requete = $pdo->prepare("SELECT film.title, film.publication, film.synopsis, film.duration, ROUND(ranking, 1) AS r_ranking
+        FROM film 
+        WHERE film.id_film =:id");
+        $requete->execute(["id"=>$id]);
+        require "view/film/detFilms.php";
+    }
+
     public function listActor(){
         $pdo= Connect::seConnecter();
         $requete = $pdo->query("SELECT * FROM person 
