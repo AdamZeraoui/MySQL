@@ -12,12 +12,18 @@ class CinemaController{
 
         require"view/film/listFilms.php";
     }
-
-    /*détails des acteurs*/
-    public function detActeurs($id){
+    public function listActor(){
         $pdo= Connect::seConnecter();
-        $requete = $pdo->prepare("SELECT * FROM actor WHERE id_actor =id");
+        $requete = $pdo->query("SELECT * FROM actor 
+        INNER JOIN person on actor.id_actor = person.id_person"); 
+
+        require"view/actor/listActor.php";
+    }
+    /*détails des acteurs*/
+    public function detActor($id){
+        $pdo= Connect::seConnecter();
+        $requete = $pdo->prepare("SELECT * FROM actor INNER JOIN person on actor.id_actor = person.id_person WHERE id_actor = :id ");
         $requete->execute(["id" => $id]);
-        require"view/actor/detActeurs.php";
+        require"view/actor/detActor.php";
     }
 }
