@@ -9,13 +9,14 @@ class CinemaController{
     public function listFilms(){
         $pdo= Connect::seConnecter();
         $requete = $pdo->query("SELECT titre, annee_sortie FROM film"); /*il faudrat mettre les bon therme*/
-        require"view/listFilms.php";
+        require"view/film/listFilms.php";
     }
 
     /*liste des acteurs*/
-    public function listActeurs(){
+    public function detActeurs($id){
         $pdo= Connect::seConnecter();
-        $requete = $pdo->query("SELECT titre, annee_sortie FROM actor"); /*il faudrat mettre les bon therme*/
-        require"view/listActeurs.php";
+        $requete = $pdo->prepare("SELECT * FROM actor WHERE id_actor =id");
+        $requete->execute(["id" => $id]);
+        require"view/actor/detActeurs.php";
     }
 }
