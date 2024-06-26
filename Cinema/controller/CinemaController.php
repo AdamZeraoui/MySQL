@@ -26,4 +26,12 @@ class CinemaController{
         $requete->execute(["id" => $id]);
         require"view/actor/detActor.php";
     }
+
+    public function listDirector(){
+        $pdo= Connect::seConnecter();
+        $requete = $pdo->query("SELECT * FROM director 
+        INNER JOIN person on director.id_director = person.id_person"); 
+
+        require"view/director/listDirector.php";
+    }
 }
