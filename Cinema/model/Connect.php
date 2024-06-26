@@ -4,7 +4,7 @@ namespace Model;
 
 abstract class Connect {
     const HOST = "localhotst";
-    const DB = "cinema";
+    const DB = "cinemaadam";
     const USER = "root";
     const PASS = "";
 
