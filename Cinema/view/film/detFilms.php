@@ -5,15 +5,23 @@
             
     <?php
             $film=$requete->fetch()?>
-            <p><?= $film["r_ranking"]  ?>
-            <br><p><?= $film["synopsis"]  ?>
-            <br><p><?= $film["duration"]  ?> minutes
+            <p>NOTE : <?= $film["r_ranking"]  ?>
+            <br><p>SYNOPSIS : <br><?= $film["synopsis"]  ?>
+            <br><p>DUREE :<?= $film["duration"]  ?> minutes
         <tr>
-            <th>PARUTION</th>
+            <th>NOM & PRENOM</th>
+            <th>DATE DE NAISSANCE</th>
+            <th>RÔLE</th>
         </tr>
     </thead>
     <tbody>
-
+    <?php
+            foreach($requeteActor->fetchALL() as $actor){?><tr>
+                    <td><?= $actor["last_name"].' '.$actor["first_name"] ?></td>
+                    <td><?= $actor["fr_birthday"]  ?></td>
+                    <td><?= $actor["role_name"]  ?></td>
+                </tr>
+        <?php   } ?>
     </tbody>
 </table>
 

@@ -18,6 +18,16 @@ class CinemaController{
         FROM film 
         WHERE film.id_film =:id");
         $requete->execute(["id"=>$id]);
+
+        $requeteActor = $pdo->prepare("SELECT DISTINCT person.first_name, person.last_name, person.gender, charactere.role_name, DATE_FORMAT(person.birthday, '%d/%m/%Y') AS fr_birthday
+        FROM play 
+        INNER JOIN actor ON play.id_actor = actor.id_actor
+        LEFT JOIN person ON actor.id_person = person.id_person
+        LEFT JOIN film ON play.id_film = film.id_film
+        LEFT JOIN charactere ON play.id_charactere = charactere.id_charactere
+        WHERE play.id_film = :id
+        ORDER BY person.last_name");
+        $requeteActor->execute(["id" => $id]);
         require "view/film/detFilms.php";
     }
 
@@ -25,7 +35,6 @@ class CinemaController{
         $pdo= Connect::seConnecter();
         $requete = $pdo->query("SELECT * FROM person 
         INNER JOIN actor ON person.id_person = actor.id_person"); 
-
         require"view/actor/listActor.php";
     }
     /*détails des acteurs*/
