@@ -3,9 +3,6 @@
 <!-- remplire LINK and META -->
     <title><?= $titre ?></title>
 </head>
-<!-- A COMPLETER <nav class="uk-navbar-container">
-
-</nav> -->
 <div id ="wrapper" class = "uk-container uk-container-expand">
     <nav>
         <ul>

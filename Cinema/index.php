@@ -25,7 +25,7 @@ if(isset($_GET["action"])){
         case "detActor" :$ctrlActor ->detActor($id);break;
         case "listDirectors" : $ctrlDirector ->listDirectors();break;
         case "detDirector" : $ctrlDirector ->detDirector($id);break;
-        case "listGenre" : $ctrlGenre -> listGenres();break;
+        case "listGenres" : $ctrlGenre -> listGenres();break;
 
     }
 }
