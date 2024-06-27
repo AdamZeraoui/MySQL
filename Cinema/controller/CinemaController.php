@@ -14,10 +14,12 @@ class CinemaController{
     }
     public function detFilms($id){
         $pdo= Connect::seConnecter();
-        $requete = $pdo->prepare("SELECT film.title, film.publication, film.synopsis, film_genre.genre_name, film.duration, ROUND(ranking, 1) AS r_ranking
+        $requete = $pdo->prepare("SELECT person.first_name, person.last_name, film.title, film.publication, film.synopsis, film_genre.genre_name, film.movie_poster, film.duration, ROUND(ranking, 1) AS r_ranking
         FROM film 
         INNER JOIN attribut ON film.id_film = attribut.id_film
         LEFT JOIN film_genre ON attribut.id_film_genre = film_genre.id_film_genre
+        LEFT JOIN director ON film.id_director = director.id_director
+        LEFT JOIN person ON director.id_person = person.id_person
         WHERE film.id_film =:id");
         $requete->execute(["id"=>$id]);
 

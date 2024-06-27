@@ -5,7 +5,9 @@
             
     <?php
             $film=$requete->fetch()?>
+            <p><img src=<?= $film["movie_poster"]  ?>width="500" height="400" alt = "affiche du film <?= $film["title"]?>"/>
             <p>NOTE : <?= $film["r_ranking"]  ?>
+            <p>REALISATEUR : <?= $film["last_name"] .' '. $film["first_name"]  ?>
             <br><p>SYNOPSIS : <br><?= $film["synopsis"]  ?>
             <br><p>DUREE :<?= $film["duration"]  ?> minutes
             <br><p>GENRE : 
