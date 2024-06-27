@@ -12,7 +12,7 @@ class CinemaController{
 
         require"view/film/listFilms.php";
     }
-    public function detFilms($id){
+    public function detFilm($id){
         $pdo= Connect::seConnecter();
         $requete = $pdo->prepare("SELECT person.first_name, person.last_name, film.title, film.publication, film.synopsis, film_genre.genre_name, film.movie_poster, film.duration, ROUND(ranking, 1) AS r_ranking
         FROM film 
@@ -40,14 +40,14 @@ class CinemaController{
         WHERE play.id_film = :id
         ORDER BY person.last_name");
         $requeteActor->execute(["id" => $id]);
-        require "view/film/detFilms.php";
+        require "view/film/detFilm.php";
     }
 
-    public function listActor(){
+    public function listActors(){
         $pdo= Connect::seConnecter();
         $requete = $pdo->query("SELECT * FROM person 
         INNER JOIN actor ON person.id_person = actor.id_person"); 
-        require"view/actor/listActor.php";
+        require"view/actor/listActors.php";
     }
     /*détails des acteurs*/
     public function detActor($id){
@@ -73,11 +73,11 @@ class CinemaController{
         require"view/actor/detActor.php";
     }
 
-    public function listDirector(){
+    public function listDirectors(){
         $pdo= Connect::seConnecter();
         $requete = $pdo->query("SELECT * FROM person
         INNER JOIN director ON person.id_person = director.id_person"); 
-        require"view/director/listDirector.php";
+        require"view/director/listDirectors.php";
     }
 
     public function detDirector($id){
