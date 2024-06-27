@@ -7,7 +7,6 @@
         <tr>
             <th>NOM</th>
             <th>PRENOM</th>
-            <th>ID</th>
         </tr>
     </thead>
     <tbody>
@@ -16,7 +15,6 @@
                 <tr>
                     <td><?= $director["last_name"]?></td>
                     <td><?= $director["first_name"]?></td>
-                    <td><?= $director["id_person"]?></td>
                 </tr>
     <?php   } ?>
     </tbody>

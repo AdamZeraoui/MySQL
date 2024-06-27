@@ -8,10 +8,14 @@
             <p>NOTE : <?= $film["r_ranking"]  ?>
             <br><p>SYNOPSIS : <br><?= $film["synopsis"]  ?>
             <br><p>DUREE :<?= $film["duration"]  ?> minutes
+            <br><p>GENRE : 
+            <?php foreach($requeteGender->fetchALL() as $gender){?><tr>
+                    <td><?= $gender["genre_name"] ?></td> 
+                <?php }?>
         <tr>
-            <th>NOM & PRENOM</th>
-            <th>DATE DE NAISSANCE</th>
-            <th>RÔLE</th>
+            <th><br>NOM & PRENOM</th>
+            <th><br>DATE DE NAISSANCE</th>
+            <th><br>RÔLE</th>
         </tr>
     </thead>
     <tbody>

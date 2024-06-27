@@ -15,7 +15,8 @@ if(isset($_GET["action"])){
         case "listActor" : $ctrlCinema ->listActor(); break;
         case "detActor" :$ctrlCinema ->detActor($id);break;
         case "listDirector" : $ctrlCinema ->listDirector();break;
-        case"detFilms": $ctrlCinema ->detFilms($id);break;
+        case "detFilms": $ctrlCinema ->detFilms($id);break;
+        case "detDirector" : $ctrlCinema ->detDirector($id);break;
 
 
 
