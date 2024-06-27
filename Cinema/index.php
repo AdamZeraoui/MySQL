@@ -1,24 +1,31 @@
 <?php
 
-use Controller\CinemaController;
+use Controller\GenreController;
+use Controller\FilmController;
+use Controller\ActorController;
+use Controller\DirectorController;
 
 spl_autoload_register(function($class_name){
     include $class_name . '.php';
 });
 
-$ctrlCinema = new CinemaController();
+$ctrlDirector = new DirectorController();
+$ctrlFilm = new FilmController();
+$ctrlActor = new ActorController();
+$ctrlGenre = new GenreController();
+
+
 $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 
 if(isset($_GET["action"])){
     switch ($_GET["action"]) {
-        case "listFilms" : $ctrlCinema->listFilms(); break;
-        case "listActors" : $ctrlCinema ->listActors(); break;
-        case "detActor" :$ctrlCinema ->detActor($id);break;
-        case "listDirectors" : $ctrlCinema ->listDirectors();break;
-        case "detFilm": $ctrlCinema ->detFilm($id);break;
-        case "detDirector" : $ctrlCinema ->detDirector($id);break;
-
-
+        case "listFilms" : $ctrlFilm->listFilms(); break;
+        case "detFilm": $ctrlFilm ->detFilm($id);break;
+        case "listActors" : $ctrlActor ->listActors(); break;
+        case "detActor" :$ctrlActor ->detActor($id);break;
+        case "listDirectors" : $ctrlDirector ->listDirectors();break;
+        case "detDirector" : $ctrlDirector ->detDirector($id);break;
+        case "listGenre" : $ctrlGenre -> listGenres();break;
 
     }
 }

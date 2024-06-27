@@ -12,7 +12,7 @@
             <li><a href="index.php?action=listFilms">Films</a></li>
             <li><a href="index.php?action=listActors">Acteurs</a></li>
             <li><a href="index.php?action=listDirectors">Realisateurs</a></li>
-            <li><a href=""></a></li>
+            <li><a href="index.php?action=listGenres">Genre de film</a></li>
             <li><a href=""></a></li>
         </ul>
     </nav>
