@@ -13,8 +13,8 @@
         <?php
             foreach($requete->fetchALL() as $director){?>
                 <tr>
-                    <td><?= $director["last_name"]?></td>
-                    <td><?= $director["first_name"]?></td>
+                    <td><a href="index.php?action=detDirector&id=<?= $director["id_director"] ?>"><?= $director["last_name"]?></a></td>
+                    <td><a href="index.php?action=detDirector&id=<?= $director["id_director"] ?>"><?= $director["first_name"]?></a></td>
                 </tr>
     <?php   } ?>
     </tbody>

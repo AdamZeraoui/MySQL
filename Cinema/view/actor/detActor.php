@@ -19,7 +19,7 @@
         <?php
             foreach($requeteRole->fetchALL() as $role){?><tr>
                     <td><?= $role["publication"]  ?></td>
-                    <td><?= $role["title"]  ?></td>
+                    <td><a href="index.php?action=detFilm&id=<?= $role["id_film"] ?>"><?= $role["title"]  ?></a></td>
                     <td><?= $role["role_name"]  ?></td>
                     <td><?= $role["r_ranking"]  ?> / 5</td>
                 </tr>

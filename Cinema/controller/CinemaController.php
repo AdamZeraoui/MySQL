@@ -8,13 +8,13 @@ class CinemaController{
     /*lister les films*/
     public function listFilms(){
         $pdo= Connect::seConnecter();
-        $requete = $pdo->query("SELECT title, publication FROM film"); 
+        $requete = $pdo->query("SELECT title, publication, id_film FROM film"); 
 
         require"view/film/listFilms.php";
     }
     public function detFilm($id){
         $pdo= Connect::seConnecter();
-        $requete = $pdo->prepare("SELECT person.first_name, person.last_name, film.title, film.publication, film.synopsis, film_genre.genre_name, film.movie_poster, film.duration, ROUND(ranking, 1) AS r_ranking
+        $requete = $pdo->prepare("SELECT director.id_director, person.first_name, person.last_name, film.title, film.publication, film.synopsis, film_genre.genre_name, film.movie_poster, film.duration, ROUND(ranking, 1) AS r_ranking
         FROM film 
         INNER JOIN attribut ON film.id_film = attribut.id_film
         LEFT JOIN film_genre ON attribut.id_film_genre = film_genre.id_film_genre
@@ -31,7 +31,7 @@ class CinemaController{
         WHERE film.id_film =:id");
         $requeteGender->execute(["id"=>$id]);
 
-        $requeteActor = $pdo->prepare("SELECT DISTINCT person.first_name, person.last_name, person.gender, charactere.role_name, DATE_FORMAT(person.birthday, '%d/%m/%Y') AS fr_birthday
+        $requeteActor = $pdo->prepare("SELECT DISTINCT actor.id_actor, person.first_name, person.last_name, person.gender, charactere.role_name, DATE_FORMAT(person.birthday, '%d/%m/%Y') AS fr_birthday
         FROM play 
         INNER JOIN actor ON play.id_actor = actor.id_actor
         LEFT JOIN person ON actor.id_person = person.id_person
@@ -61,7 +61,7 @@ class CinemaController{
         WHERE play.id_actor = :id ");
         $requete->execute(["id" => $id]);
 
-        $requeteRole = $pdo->prepare("SELECT DISTINCT film.publication, film.title, charactere.role_name, ROUND(ranking,1) as r_ranking
+        $requeteRole = $pdo->prepare("SELECT DISTINCT film.id_film, film.publication, film.title, charactere.role_name, ROUND(ranking,1) as r_ranking
         FROM play 
         INNER JOIN actor ON play.id_actor = actor.id_actor
         LEFT JOIN person ON actor.id_person = person.id_person
@@ -88,7 +88,7 @@ class CinemaController{
         WHERE director.id_director = :id ");
         $requete->execute(["id" => $id]);
 
-        $requeteDo = $pdo->prepare("SELECT DISTINCT film.publication, film.title, ROUND(ranking,1) as r_ranking
+        $requeteDo = $pdo->prepare("SELECT DISTINCT film.id_film ,film.publication, film.title, ROUND(ranking,1) as r_ranking
         FROM director
         INNER JOIN film ON director.id_director = film.id_director
         WHERE director.id_director = :id 

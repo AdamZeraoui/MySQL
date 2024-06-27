@@ -18,7 +18,7 @@
         <?php
             foreach($requeteDo->fetchALL() as $do){?><tr>
                     <td><?= $do["publication"]  ?></td>
-                    <td><?= $do["title"]  ?></td>
+                    <td><a href="index.php?action=detFilm&id=<?= $do["id_film"] ?>"><?= $do["title"]  ?></a></td>
                     <td><?= $do["r_ranking"]  ?> / 5</td>
                 </tr>
         <?php   } ?>
