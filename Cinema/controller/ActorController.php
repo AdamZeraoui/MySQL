@@ -57,7 +57,8 @@ class ActorController{
         ]);
 
         $id_person = $pdo->lastInsertId();
-        
+        $requeteId = $pdo->prepare("INSERT INTO actor (id_person) VALUES (:id_person)");
+        $requeteId->execute(["id_person" => $id_person]);
 
 
 
