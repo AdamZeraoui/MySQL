@@ -19,7 +19,15 @@
     <?php   } ?>
     </tbody>
 </table>
-
+<dev class="w_form">
+    <form method="POST" action="index.php?action=addActor">
+        <input type="text" id="person" name="last_name" placeholder="Entrer un nom" required/><br>
+        <input type="text" id="person" name="first_name" placeholder="Entrer un prenom" required/><br>
+        <input type="text" id="person" name="birthday" placeholder="Entrer une date de naissance" required/><br>
+        <input type="text" id="person" name="gender" placeholder="Entrer un genre" required/>
+        <input type="submit" name="submit" value="Ajouter">
+    </form>
+</dev>
 <?php
 
 $titre = "Liste des acteurs";
