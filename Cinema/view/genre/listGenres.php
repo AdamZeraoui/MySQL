@@ -18,11 +18,16 @@
     </tbody>
 </table>
 
+<dev class="w_form">
+    <form method="POST" action="index.php?action=addGenre">
+        <input type="text" id="gender" name="gender" placeholder="Entrer un genre de film" required/>
+        <input type="submit" name="submit" value="Ajouter">
+    </form>
+</dev>
+
 <?php
 
 $titre = "Liste des genres";
 $titre_secondaire = "Liste des genres";
 $contenu = ob_get_clean();
 require "view/template.php";
-
-//faire un formulaire pour ajouter un nouveau genre. 
