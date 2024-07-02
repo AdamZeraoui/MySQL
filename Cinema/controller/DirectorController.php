@@ -28,4 +28,37 @@ class DirectorController{
         require"view/director/detDirector.php";
     }
 
+    public function addDirector(){
+        if(isset($_POST["submit"])){
+            $pdo = Connect::seConnecter();
+
+            $last_name = filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $first_name = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $birthday = filter_input(INPUT_POST, "birthday", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $gender = filter_input(INPUT_POST, "gender", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $sql = "INSERT INTO person (last_name, first_name, birthday, gender) VALUES (:last_name, :first_name, :birthday, :gender)";
+
+            $requeteInsertPerson = $pdo->prepare($sql);
+            $requeteInsertPerson->execute([
+                "last_name" => $last_name,                     
+                "first_name"=>$first_name,
+                "birthday"=>$birthday,
+                "gender"=>$gender]);
+
+            $id_person = $pdo->lastInsertId();
+            $requeteId = $pdo->prepare("INSERT INTO director (id_person) VALUES (:id_person)");
+            $requeteId->execute(["id_person" => $id_person]);
+
+
+
+            header("Location: index.php?action=listDirectors");
+
+        }
+    }
 }
+
+

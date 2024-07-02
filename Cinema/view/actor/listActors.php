@@ -21,10 +21,13 @@
 </table>
 <dev class="w_form">
     <form method="POST" action="index.php?action=addActor">
-        <input type="text" id="person" name="last_name" placeholder="Entrer un nom" required/><br>
-        <input type="text" id="person" name="first_name" placeholder="Entrer un prenom" required/><br>
-        <input type="text" id="person" name="birthday" placeholder="Entrer une date de naissance" required/><br>
-        <input type="text" id="person" name="gender" placeholder="Entrer un genre" required/>
+    <br><input type="text" id="person" name="last_name" placeholder="Entrer un Nom" required/><br>
+        <input type="text" id="person" name="first_name" placeholder="Entrer un Prenom" required/><br><br>
+        Entrer date de naissance<br><input type="date" id="person" name="birthday" required/><br><br>
+        Choisir un genre<br><input type="radio" id="person" name="gender" value="♂" checked/>
+        <label for ="person">♂</label><br>
+        <input type="radio" id="person" name="gender" value="♀" checked/>
+        <label for ="person">♀</label><br><br>
         <input type="submit" name="submit" value="Ajouter">
     </form>
 </dev>

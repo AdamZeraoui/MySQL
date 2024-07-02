@@ -32,5 +32,6 @@ if(isset($_GET["action"])){
         case "listCharacteres": $ctrlCharactere->listCharacteres();break;
         case "addRole": $ctrlCharactere->addRole();break;
         case "addActor": $ctrlActor->addActor();break;
+        case "addDirector" : $ctrlDirector->addDirector();break;
     }
 }
