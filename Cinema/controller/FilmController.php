@@ -71,25 +71,39 @@ class FilmController{
 
             $movie_poster = filter_input(INPUT_POST, "movie_poster", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            $sql = "INSERT INTO film (title, id_director, publication, synopsis, ranking, duration, movie_poster) VALUES (:title, :id_director, :publication, :synopsis, :ranking, :duration, :movie_poster)";
+            $director = filter_input(INPUT_POST, "director", FILTER_VALIDATE_INT);
 
-            $director=$pdo->query("SELECT * FROM person
-            INNER JOIN director ON person.id_person = director.id_person
-            INNER JOIN film on director.id_director = film.id_director");
+            $genres = filter_input(INPUT_POST, "genre", FILTER_VALIDATE_INT);
+
+            $sql = "INSERT INTO film (title, id_director, publication, synopsis, ranking, duration, movie_poster) VALUES (:title, :id_director, :publication, :synopsis, :ranking, :duration, :movie_poster)";
 
             $requeteAddFilm = $pdo->prepare($sql);
             $requeteAddFilm->execute([
                 "title" => $title,     
-                ":id_director" => $director,                
+                "id_director" => $director,                
                 "publication"=>$publication,
                 "synopsis"=>$synopsis,
                 "ranking"=>$ranking,
                 "duration"=>$duration,
                 "movie_poster"=>$movie_poster]
             );
+
+
+            $film_id = $pdo->lastInsertId();
+
+
+            foreach ($genres as $genre_id) {
+                $sql_genre = "INSERT INTO film_genres (film_id, genre_id) VALUES (:film_id, :genre_id)";
+                $stmt_genre = $pdo->prepare($sql_genre);
+                $stmt_genre->execute([
+                    ':film_id' => $film_id,
+                    ':genre_id' => $genre_id
+                ]);
+            }
+
             header("Location: index.php?action=listFilms");
-             // Insertion des genres associés
-            
+
+
             
 
         }
