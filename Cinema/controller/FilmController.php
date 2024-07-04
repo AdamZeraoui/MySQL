@@ -73,7 +73,7 @@ class FilmController{
 
             $director = filter_input(INPUT_POST, "director", FILTER_VALIDATE_INT);
 
-            $genres = filter_input(INPUT_POST, "genre", FILTER_VALIDATE_INT);
+            $genres = filter_input(INPUT_POST, "genre", FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY);
 
             $sql = "INSERT INTO film (title, id_director, publication, synopsis, ranking, duration, movie_poster) VALUES (:title, :id_director, :publication, :synopsis, :ranking, :duration, :movie_poster)";
 
@@ -89,17 +89,18 @@ class FilmController{
             );
 
 
-            $film_id = $pdo->lastInsertId();
+            $id_film = $pdo->lastInsertId();
 
 
-            foreach ($genres as $genre_id) {
-                $sql_genre = "INSERT INTO film_genres (film_id, genre_id) VALUES (:film_id, :genre_id)";
-                $stmt_genre = $pdo->prepare($sql_genre);
-                $stmt_genre->execute([
-                    ':film_id' => $film_id,
-                    ':genre_id' => $genre_id
+            foreach ($genres as $id_genre) {
+                $genre = "INSERT INTO attribut (id_film, id_film_genre) VALUES (:id_film, :id_genre)";
+                $executeGenre = $pdo->prepare($genre);
+                $executeGenre->execute([
+                    ':id_film' => $id_film,
+                    ':id_genre' => $id_genre
                 ]);
             }
+
 
             header("Location: index.php?action=listFilms");
 
@@ -107,6 +108,5 @@ class FilmController{
             
 
         }
-
     }
 }

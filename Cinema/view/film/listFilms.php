@@ -42,7 +42,7 @@
         <?php 
             foreach($requeteWhat->fetchALL() as $what){ ?>
                 <input type="checkbox" id="genre_<?= $what["id_film_genre"]?>" name="genre[]" value="<?= $what["id_film_genre"]?>">
-                <label for="genre_<?= $what["id_film_genre"]?>"><?= $what["genre_name"]?></label><br>
+                <label for="genre"<?= $what["id_film_genre"]?>"><?= $what["genre_name"]?></label><br>
         <?php    } ?>
 
         <textarea id="synopsis" name="synopsis" rows="5" cols="40" placeholder="Synopsis ici" required></textarea><br>
