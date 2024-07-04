@@ -34,3 +34,7 @@ $titre = "Liste des réalisateurs";
 $titre_secondaire = "Liste des réalisateurs";
 $contenu = ob_get_clean();
 require "view/template.php";
+
+
+
+

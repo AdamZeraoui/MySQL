@@ -8,9 +8,19 @@ class FilmController{
 /*lister les films*/
     public function listFilms(){
         $pdo= Connect::seConnecter();
-        $requete = $pdo->query("SELECT title, publication, id_film FROM film"); 
+        $requete = $pdo->query("SELECT DISTINCT title, publication, id_film FROM film
+        ORDER BY film.publication ASC"); 
+
+        $requeteWho = $pdo->query("SELECT * FROM person
+        INNER JOIN director ON person.id_person = director.id_person
+        INNER JOIN film on director.id_director = film.id_director"); 
+
+        $requeteWhat = $pdo->query("SELECT * from film_genre");
+        
 
         require"view/film/listFilms.php";
+
+       
     }
     public function detFilm($id){
         $pdo= Connect::seConnecter();
@@ -41,5 +51,48 @@ class FilmController{
         ORDER BY person.last_name");
         $requeteActor->execute(["id" => $id]);
         require "view/film/detFilm.php";
+    }
+
+    public function addFilm(){
+
+
+        if(isset($_POST["submit"])){
+            $pdo = Connect::seConnecter();
+
+            $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $publication = filter_input(INPUT_POST, "publication", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $synopsis = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $ranking = filter_input(INPUT_POST, "ranking", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $duration = filter_input(INPUT_POST, "duration", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $movie_poster = filter_input(INPUT_POST, "movie_poster", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $sql = "INSERT INTO film (title, id_director, publication, synopsis, ranking, duration, movie_poster) VALUES (:title, :id_director, :publication, :synopsis, :ranking, :duration, :movie_poster)";
+
+            $director=$pdo->query("SELECT * FROM person
+            INNER JOIN director ON person.id_person = director.id_person
+            INNER JOIN film on director.id_director = film.id_director");
+
+            $requeteAddFilm = $pdo->prepare($sql);
+            $requeteAddFilm->execute([
+                "title" => $title,     
+                ":id_director" => $director,                
+                "publication"=>$publication,
+                "synopsis"=>$synopsis,
+                "ranking"=>$ranking,
+                "duration"=>$duration,
+                "movie_poster"=>$movie_poster]
+            );
+            header("Location: index.php?action=listFilms");
+             // Insertion des genres associés
+            
+            
+
+        }
+
     }
 }
