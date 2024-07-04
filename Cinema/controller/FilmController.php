@@ -20,8 +20,8 @@ class FilmController{
 
         require"view/film/listFilms.php";
 
-       
     }
+    
     public function detFilm($id){
         $pdo= Connect::seConnecter();
         $requete = $pdo->prepare("SELECT director.id_director, person.first_name, person.last_name, film.title, film.publication, film.synopsis, film_genre.genre_name, film.movie_poster, film.duration, ROUND(ranking, 1) AS r_ranking
